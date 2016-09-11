@@ -1,0 +1,24 @@
+#everything {
+	margin: auto;
+	width: 500px;
+	height: 300px;
+	padding: 5px;
+	border: solid #c3c3c3 1px;
+}
+#images {
+	width: 78px;
+	height: 300px;
+	float: left;
+	border: solid #c3c3c3 1px;
+}
+#container {
+	float: right;
+	height: 300px;
+	width: 400px;
+	border: solid #c3c3c3 1px;
+}
+#drag0 {
+	position: absolute;
+	margin: 5px 13px 0px 13px;
+	border: solid #c3c3c3 1px;
+}
