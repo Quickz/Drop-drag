@@ -15,15 +15,9 @@ $("#drag0").on("dragstart", function() { return false; });
 function dragStart(e)
 {
   dragged = true;
-  return coordInImg(e);
-}
-// Gets mouse position relative to the image
-function coordInImg(e)
-{
-  var tmp = getMousePos(e, "drag0");
-  tmp.x -= 12.5;
-  tmp.y -= 3;
-  return tmp;
+  // gets mouse position relative to image
+  // This insure that the mouse position doesn't change inside the image
+  return getMousePos(e, "drag0")
 }
 function dragOver()
 {
@@ -33,11 +27,9 @@ function drag(e)
 {
   if (dragged)
   {
-    var coord = getMousePos(e, "everything");
-    // Start coordinates are necessary to change the image "center" to the clicked position
-    $("#drag0").css({left: coord.x - startCoord.x, top: coord.y - startCoord.y});
+    $("#drag0").css({left: e.clientX - startCoord.x, top: e.clientY - startCoord.y});
     console.log("START: " + "X: " + startCoord.x + " " + "Y: " + startCoord.y);
-    console.log("MAIN: " + "X: " + coord.x + " " + "Y: " + coord.y);
+    console.log("MAIN: " + "X: " + e.clientX + " " + "Y: " + e.clientY);
   }
 }
 function getMousePos(e, id)
