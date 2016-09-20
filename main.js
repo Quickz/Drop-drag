@@ -1,41 +1,63 @@
 (function($){
 
-var dragged = false;
-var startCoord;
-
-$("#drag0").mousedown(function(e) { startCoord = dragStart(e); });
-$("html").mouseup(function() { dragOver(); });
-$("html").mousemove(function(e) { drag(e); });
-
-// Preventing default drag
-$("#drag0").on("dragstart", function() { return false; });
-
-
-
-function dragStart(e)
+function getMousePos(e)
 {
-  dragged = true;
-  // gets mouse position relative to image
-  // This insure that the mouse position doesn't change inside the image
-  return getMousePos(e, "drag0")
-}
-function dragOver()
-{
-  dragged = false
-}
-function drag(e)
-{
-  if (dragged)
-  {
-    $("#drag0").css({left: e.clientX - startCoord.x, top: e.clientY - startCoord.y});
-    console.log("START: " + "X: " + startCoord.x + " " + "Y: " + startCoord.y);
-    console.log("MAIN: " + "X: " + e.clientX + " " + "Y: " + e.clientY);
-  }
-}
-function getMousePos(e, id)
-{
-  var rect = $("#" + id)[0].getBoundingClientRect();
+  var rect = $(e.target)[0].getBoundingClientRect();
   return { x: e.clientX - rect.left, y: e.clientY - rect.top};
 }
+
+$.fn.draggable = function() {
+  if (this.css("position") == "static")
+  {
+    throw("Unable to set " + this.attr("id") +
+      " to a draggable object due to the static position.");
+    return;
+  }
+
+  // Storing a variable inside the element
+  this.data("dragged", false);
+
+  // Preventing default drag
+  this.on("dragstart", function() { return false; });
+
+// Drag Start
+  this.mousedown(function(e) {
+    $(e.target).data("dragged", true)
+    // gets mouse position relative to image
+    // This insures that the mouse position doesn't change inside the image
+    .data("startCoord", JSON.stringify( getMousePos(e, $(e.target).attr("id")) ));
+  });
+
+  // Storing this into a variable so it can be accessed in inside
+  var element = this;
+
+  // Drag Stop
+  $("html").mouseup(function(e) {
+    element.data("dragged", false);
+  });
+
+  // Drag - locks the element on your cursor
+  $("html").mousemove(function(e) {
+    if (element.data("dragged"))
+    {
+      var startCoord = JSON.parse(element.data("startCoord"));
+      element.css({left: e.clientX - startCoord.x, top: e.clientY - startCoord.y});
+      //console.log("START: " + "X: " + startCoord.x + " " + "Y: " + startCoord.y);
+      //console.log("MAIN: " + "X: " + e.clientX + " " + "Y: " + e.clientY);
+    }
+  });
+};
+
+$("#drag0").draggable();
+$("#drag1").draggable();
+$("#drag2").draggable();
+
+
+
+
+
+
+
+
 
 })(jQuery);

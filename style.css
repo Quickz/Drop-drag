@@ -17,7 +17,7 @@
 	width: 400px;
 	border: solid #c3c3c3 1px;
 }
-#drag0 {
+#drag0, #drag1, #drag2 {
 	position: absolute;
 	border: solid #c3c3c3 1px;
 }
