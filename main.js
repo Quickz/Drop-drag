@@ -1,8 +1,7 @@
 (function($){
 
-  $("#drag0").draggable();
-  $("#drag1").draggable();
-  $("#drag2").draggable();
+  for (let i = 0; i < 3; i++)
+    $("#drag" + i).draggable({ containment: "#everything" });
 
 
 
