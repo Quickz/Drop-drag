@@ -20,3 +20,10 @@
 #drag0, #drag1, #drag2 {
 	border: solid #c3c3c3 1px;
 }
+.slot {
+	float: left;
+	margin: 15px;
+	width: 55px;
+	height: 55px;
+	border: solid #c3c3c3 1px;
+}
