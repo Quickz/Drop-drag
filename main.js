@@ -9,6 +9,8 @@
 	for (let i = 0; i < 11; i++)
 		$("#slot" + i).droppable({
 			drop: function(e, ui) {
+				$(this).empty();
+				// Moves element to container
 				ui.draggable.detach().appendTo($(this));
 			}
 		});
