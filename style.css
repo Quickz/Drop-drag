@@ -1,11 +1,12 @@
 #everything {
 	margin: auto;
 	width: 500px;
-	height: 300px;
+	height: 350px;
 	padding: 5px;
 	border: solid #c3c3c3 1px;
 }
 #images {
+	overflow: auto;
 	width: 78px;
 	height: 300px;
 	float: left;
@@ -17,7 +18,7 @@
 	width: 400px;
 	border: solid #c3c3c3 1px;
 }
-#drag0, #drag1, #drag2 {
+.drgble {
 	border: solid #c3c3c3 1px;
 }
 .slot {
@@ -26,4 +27,15 @@
 	width: 55px;
 	height: 55px;
 	border: solid #c3c3c3 1px;
+}
+
+#add-txt {
+	margin-top: 1px;
+	width: 74px;
+}
+#add-img {
+	width: 80px;
+	background: green;
+	color: white;
+	border: none;
 }
