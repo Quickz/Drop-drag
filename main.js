@@ -14,10 +14,28 @@
 	}
 	function addImage(url)
 	{
-		$("#images").append('<img id=drag' + images + ' class="drgble" src=' + 
-			url + ' width="50px"></img>');
+		/*
+			<div id="img-cont0" class="img-cont">
+				<div class="drg-border">
+					<img id="drag0" class="drgble" src="http://i.imgur.com/y7cAttE.png"></img>
+				</div>
+				<button id="img-del0" class="img-del">Delete</button>
+			</div>
+		*/
+		$("#images").append('<div id="img-cont' + images + '" class="img-cont">' +
+				'<div class="drg-border">' +
+					'<img id="drag' + images + '" class="drgble" src="' + url + '"></img>' +
+				'</div>' +
+				'<button id="img-del' + images + '" class="img-del">Delete</button>' +
+			'</div>');
+		//$("#images").append('<img id=drag' + images + ' class="drgble" src=' + 
+		//	url + ' ></img>');
 		imgDraggable(images);
 		images++;
+	}
+	function checkURL(url)
+	{
+    	return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 	}
 	for (let i = 0; i < 12; i++)
 		$("#slot" + i).droppable({
@@ -27,13 +45,15 @@
 				$(this).append(ui.draggable.clone());
 			}
 		});
-	$("#test").on("click", function(){
+	/*$("#test").on("click", function(){
 		$("#images").append('<img id=drag' + images + ' class="drgble"' + 
 			' src="http://i.imgur.com/y7cAttE.png" width="50px"></img>');
 		imgDraggable(images);
 		images++;
-	});
+	});*/
 	$("#add-img").on("click", function(){
+		if ($("#add-txt").val().includes(" ") || !checkURL($("#add-txt").val()))
+			return;
 		addImage($("#add-txt").val());
 		$("#add-txt").val("");
 	});
